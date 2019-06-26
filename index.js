@@ -2,16 +2,22 @@ const Buyer = require('./Buyer')
 const ObjectForSale = require('./ObjectForSale')
 
 // The buyers
-const a = new Buyer({ name: 'A', bids: [110, 130] })
-const b = new Buyer({ name: 'B', bids: [] })
-const c = new Buyer({ name: 'C', bids: [125] })
-const d = new Buyer({ name: 'D', bids: [105, 115, 90] })
-const e = new Buyer({ name: 'E', bids: [132, 135, 140] })
+const rawBuyers = [
+  { name: 'A', bids: [110, 130] },
+  { name: 'B', bids: [] },
+  { name: 'C', bids: [125] },
+  { name: 'D', bids: [105, 115, 90] },
+  { name: 'E', bids: [132, 135, 140] }
+]
+
+function buyerFactory(listRawBuyers) {
+  return listRawBuyers.map((buyer) => new Buyer(buyer))
+}
 
 // The Auction
 const auction = new ObjectForSale( {
   reservePrice: 100,
-  buyers: [a, b, c, d, e]
+  buyers: buyerFactory(rawBuyers)
 })
 
 // Result

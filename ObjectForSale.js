@@ -11,15 +11,21 @@ module.exports = class ObjectForSale {
     }
 
     this.reservePrice = reservePrice
-    // nothing to do yet with the buyers, I can sort them nom
-    this.buyers = buyers.sort((a, b) => {
-      return a.bestBid > b.bestBid ? -1 : 1
-    })
+    this.buyers = buyers
+  }
+
+  /**
+   * @returns {Array} - The buyers sorted by their best bid
+   */
+  get sortedBuyers () {
+    const buyersCopy = [...this.buyers]
+    return buyersCopy.sort((a, b) => a.bestBid > b.bestBid ? -1 : 1)
   }
 
   /**
    * gets the winner and the price he'll pay for the object.
    * if no buyer wins, the auction is canceled.
+   * @returns {Object} - the result of the auction
    */
   getResult () {
     const winner = this.getWinner()
@@ -34,9 +40,10 @@ module.exports = class ObjectForSale {
 
   /**
    * Get the best buyer by bid value only if his bid is above the reserve price
+   * @returns {Buyer} - the winner of the auction
    */
   getWinner () {
-    const winner = this.buyers[0]
+    const winner = this.sortedBuyers[0]
     return winner && winner.bestBid > this.reservePrice ? winner : null
   }
 
@@ -44,7 +51,7 @@ module.exports = class ObjectForSale {
    * get the price to pay, it can be the second best bid if above te reserve price or the reserve price itself
    */
   getPriceToPay() {
-    const secondBestBuyer = this.buyers[1]
+    const secondBestBuyer = this.sortedBuyers[1]
     return secondBestBuyer && secondBestBuyer.bestBid > this.reservePrice ? secondBestBuyer.bestBid : this.reservePrice
   }
 }
