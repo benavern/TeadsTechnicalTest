@@ -49,6 +49,7 @@ module.exports = class ObjectForSale {
 
   /**
    * get the price to pay, it can be the second best bid if above te reserve price or the reserve price itself
+   * @returns {Integer} - the price the winner will have to pay
    */
   getPriceToPay() {
     const secondBestBuyer = this.sortedBuyers[1]
