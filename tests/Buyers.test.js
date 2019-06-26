@@ -1,4 +1,4 @@
-const Buyer = require('./Buyer')
+const Buyer = require('../auction/Buyer')
 
 describe('Buyer', () => {
   test('create a new buyer with default properties', () => {

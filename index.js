@@ -1,5 +1,5 @@
-const Buyer = require('./Buyer')
-const ObjectForSale = require('./ObjectForSale')
+const Buyer = require('./auction/Buyer')
+const ObjectForSale = require('./auction/ObjectForSale')
 
 // The buyers
 const rawBuyers = [
